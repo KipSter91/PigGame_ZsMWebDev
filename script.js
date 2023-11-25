@@ -11,3 +11,12 @@ const current1El = document.getElementById('.current--1');
 const NewGameBtn = document.querySelector('.btn--new');
 const RollDiceBtn = document.querySelector('.btn--roll');
 const holdScoreBtn = document.querySelector('.btn--hold');
+
+console.log(player0El);
+
+//setup the starting conditions
+score0El.textContent = 0;
+score1El.textContent = 0;
+
+diceEl.classList.add('hidden');
+
