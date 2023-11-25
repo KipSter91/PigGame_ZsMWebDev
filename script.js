@@ -20,3 +20,6 @@ score1El.textContent = 0;
 
 diceEl.classList.add('hidden');
 
+//generate random dice numbers (1-6)
+const RandomDiceRoll = Math.floor(Math.random() * 6) + 1;
+console.log(RandomDiceRoll);
