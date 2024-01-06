@@ -1,28 +1,33 @@
 'use strict';
 
 // Selecting elements from DOM and define them in variables
-const current1El = document.getElementById('current--1');
-const current0El = document.getElementById('current--0');
-const score0El = document.getElementById('score--0');
-const score1El = document.getElementById('score--1');
-const player0El = document.querySelector('.player--0');
-const player1El = document.querySelector('.player--1');
+const current1El = document.getElementById('current--2');
+const current0El = document.getElementById('current--1');
+const score0El = document.getElementById('score--1');
+const score1El = document.getElementById('score--2');
+const player0El = document.querySelector('.player--1');
+const player1El = document.querySelector('.player--2');
 const diceEl = document.querySelector('.dice');
 const newGameBtn = document.querySelector('.btn--new');
 const rollDiceBtn = document.querySelector('.btn--roll');
 const holdScoreBtn = document.querySelector('.btn--hold');
+const winOrLoseInfo = document.querySelectorAll('.info');
 
 let scores, currentScore, activePlayer;
 
 //FUNCTIONS
 const newGame = () => {
-  scores = [0, 0];
+  scores = [100, 0];
   currentScore = 0;
-  activePlayer = 0;
+  activePlayer = 1;
   score0El.textContent = 0;
   score1El.textContent = 0;
   current0El.textContent = 0;
   current1El.textContent = 0;
+  for (let i = 0; i < winOrLoseInfo.length; i++) {
+    // winOrLoseInfo[i].querySelector('.winorlose').textContent = ''
+    winOrLoseInfo[i].classList.add('hidden');
+  }
 
   diceEl.classList.remove('hidden');
   rollDiceBtn.classList.remove('hidden');
@@ -49,7 +54,7 @@ const newGame = () => {
 const switchPlayer = () => {
   document.getElementById(`current--${activePlayer}`).textContent = 0;
   currentScore = 0;
-  activePlayer = activePlayer === 0 ? 1 : 0;
+  activePlayer = activePlayer === 1 ? 2 : 1;
   player0El.classList.toggle('player--active');
   player1El.classList.toggle('player--active');
 };
@@ -73,16 +78,28 @@ const rollDice = () => {
 
 //holding button function and hold the current score
 const holdCurrentScore = () => {
-  scores[activePlayer] += currentScore;
+  scores[activePlayer - 1] += currentScore;
   document.getElementById(`score--${activePlayer}`).textContent =
-    scores[activePlayer];
-  if (scores[activePlayer] >= 100) {
+    scores[activePlayer - 1];
+  if (scores[activePlayer - 1] >= 100) {
     rollDiceBtn.classList.add('hidden');
     holdScoreBtn.classList.add('hidden');
     document
       .querySelector(`.player--${activePlayer}`)
       .classList.add('player--winner');
     diceEl.classList.add('hidden');
+    winOrLoseInfo.forEach((element, index, arr) => {
+      element.classList.remove('hidden')
+      const texts = winOrLoseInfo[index].querySelectorAll('.winorlose')
+      for (const text of texts) {
+        (index === activePlayer - 1)
+          ?
+          text.textContent = 'You Won!'
+          :
+          text.textContent = 'You Lost!'
+      }
+    }
+    )
   } else {
     switchPlayer();
   }

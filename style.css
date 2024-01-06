@@ -46,7 +46,8 @@ main {
 }
 
 /* ELEMENTS */
-.name {
+.name,
+.info {
   position: relative;
   font-size: 4rem;
   text-transform: uppercase;
@@ -73,11 +74,13 @@ main {
   font-weight: 400;
 }
 
-.player--active .current {
+.player--active .current,
+.player--active .info {
   opacity: 1;
 }
 
-.current {
+.current,
+.info {
   background-color: #c7365f;
   opacity: 0.8;
   border-radius: 9px;
@@ -88,11 +91,16 @@ main {
   transition: all 0.75s;
 }
 
-.current-label {
+.current-label,
+.winorlose {
   text-transform: uppercase;
   margin-bottom: 1rem;
   font-size: 1.7rem;
   color: #ddd;
+}
+
+.winorlose {
+  margin: 0;
 }
 
 .current-score {
